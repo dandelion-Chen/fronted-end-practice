@@ -1,0 +1,8 @@
+客户端WEB API
+https://developer.mozilla.org/zh-CN/docs/Learn/JavaScript/Client-side_web_APIs
+
+JavaScript  中的对象
+https://developer.mozilla.org/zh-CN/docs/Learn/JavaScript/Objects
+
+JavaScript 全览
+https://developer.mozilla.org/zh-CN/docs/Web/JavaScript

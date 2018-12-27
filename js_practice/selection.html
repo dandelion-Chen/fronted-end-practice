@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>selection</title>
+</head>
+<body>
+    <div id="container">
+        <p>这是P标签</p>
+        <div>div标签，讲点什么东西好呢。<span>我把span标签加在这里边</span></div>
+        <b>加粗标签我也给一点吧，接下来就是一张图片了</b>
+        <img src="http://d.233sy.cn/Uploads/20181016/sy233_20181016181308_61.jpg" alt="" />
+    </div>
+</body>
+</html>
+<script>
+    window.onload = function () {
+        var container = document.getElementById('container');
+        container.addEventListener('click', function(e){
+            var selection = window.getSelection() || document.getSelection();
+            console.log(e.target.localName);
+        })
+    }
+</script>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>promise 、await、async</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    var setPromise1 = function () {
+        return new Promise((resolve, reject) => {
+            setTimeout(r =>{
+                resolve('resolve 01');
+            }, 1000)
+        });
+    }
+    var setPromise2 = function () {
+        return new Promise((resolve, reject) => {
+            setTimeout(r =>{
+                resolve('resolve 02');
+            }, 2000)
+        });
+    }
+
+    window.onload = async function () {
+        // 此处时间为两个promise的时间累积
+        var a = await setPromise1();
+        var b = await setPromise2();
+        console.log(b);
+        console.log(a);
+        
+
+        setTimeout(r => { // 此处在1s后显示resolve 01 ，在第2s后显示 resolve 02 ，总时间为两个promise中，最长的时间
+            var a1, b1;
+            setPromise2().then(r => {
+                console.log(r);
+            })
+            setPromise1().then(r => {
+                console.log(r);
+            })
+           
+        }, 3000)
+
+        setTimeout(r => { // 第2s后显示 resolve 02 ,然后再显示resolve 01
+            var a1, b1;
+            Promise.all([setPromise2(), setPromise1()]).then(r => {
+                console.log(r);
+            })
+        }, 6000)
+
+        setTimeout(async r => { // 第2s后显示 resolve 02 ,然后再显示resolve 01
+            var a3 = setPromise1(); 
+            var b3 = setPromise2();
+            // a2 = await a3;
+            // b2 = await b3;
+            console.log(await b3);
+            console.log(await a3);
+            
+        }, 9000)
+    }
+</script>

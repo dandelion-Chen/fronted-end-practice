@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Array 总观</title>
+    <style> 
+        code{
+            background-color: #f3f3f3;
+            border-radius: 3px;
+            display: inline-block;
+            padding: 10px 50px 10px 0;
+            color: #353553;
+        }
+        p {
+            color: #ca612299;
+            font-size: 15px;
+        }
+    </style>
+</head>
+<body>
+    <h1>数组是类似于列表的高阶对象。</h1>
+    <div>
+        <h3>1、函数的长度</h3>
+        <pre>
+            <code>
+            var arr1 = ['1', '2', '3']; 
+            console.log(arr1.length) // 3
+            </code>
+        </pre>
+        <h3>2、遍历数组, 使用forEach</h3>
+        <pre>
+            <code>
+                var arr2 = ['我是第一个','我是第二个','我是第三个','我是第四个','我是第五个','我是第六个'];
+                forEachInsertItem(arr2);
+
+                function forEachInsertItem (arr) {
+                    arr.forEach((element, index, array)  => {
+                        console.log(element, index, array);
+                    });
+                }
+                // 我是第一个 0 Array(6)
+                // 我是第二个 1 Array(6)
+                // 我是第三个 2 Array(6)
+                // 我是第四个 3 Array(6)
+                // 我是第五个 4 Array(6)
+                // 我是第六个 5 Array(6)
+            </code>
+        </pre>
+
+        <h3>3、添加元素到数组的末尾 push，删除数组末尾的元素pop</h3>
+        <pre>
+            <p>注意: 此处若数组作为一个参数传参时，也是将本身给修改到。因为数组传递的是一个指针地址，一修改原本数组也对应修改到。</p>
+            <code>
+                var arr2 = ['我是第一个','我是第二个','我是第三个','我是第四个','我是第五个','我是第六个'];
+                
+                pushDataToArr('在末尾加入', arr2);
+                console.log(arr2) // (7) ["我是第一个", "我是第二个", "我是第三个", "我是第四个", "我是第五个", "我是第六个", "在末尾加入"]
+                popDataFromArr(arr2);
+
+                function pushDataToArr (value, arr) {
+                    arr.push(value);  
+                    console.log(arr); // (7) ["我是第一个", "我是第二个", "我是第三个", "我是第四个", "我是第五个", "我是第六个", "在末尾加入"]
+                }
+                
+                function popDataFromArr (arr) {
+                    arr.pop(); 
+                    console.log(arr); // (6) ["我是第一个", "我是第二个", "我是第三个", "我是第四个", "我是第五个", "我是第六个"]
+                }
+            </code>
+        </pre>
+
+        <h3>4、添加元素到数组的头部unshift，删除数头部尾的元素shift</h3>
+        <pre>
+            <p>注意: 此处若数组作为一个参数传参时，也是将本身给修改到。因为数组传递的是一个指针地址，一修改原本数组也对应修改到。</p>
+            <code>
+                var arr2 = ['我是第一个','我是第二个','我是第三个','我是第四个','我是第五个','我是第六个'];
+                
+                unshiftDataFromArr('在头部加入', arr2);
+                console.log(arr2)  // ["在头部加入", "我是第一个", "我是第二个", "我是第三个", "我是第四个", "我是第五个", "我是第六个"]
+                shiftDataToArr(arr2); 
+
+                function unshiftDataFromArr  (value, arr) { //在头部添加
+                    arr.unshift(value);
+                    console.log(arr);  //["在头部加入", "我是第一个", "我是第二个", "我是第三个", "我是第四个", "我是第五个", "我是第六个"]
+                }
+                
+                function shiftDataToArr (arr) { // 在头部删除
+                    arr.shift();
+                    console.log(arr); // ["我是第一个", "我是第二个", "我是第三个", "我是第四个", "我是第五个", "我是第六个"]
+                }
+            </code>
+        </pre>
+
+        <h3>5、数组复制 slice  arrayObject.slice(start,end)，start 与 end 不填写，直接返回整个数组, start 为负时为倒数， -1 代表倒数第一个。</h3>
+        <pre>
+            <p>注意: arr2Copy复制与arr2，当arr2Copy 发生改变时，不影响arr2。</p>
+            <code>
+            var arr2 = ['我是第一个','我是第二个','我是第三个','我是第四个','我是第五个','我是第六个'];
+
+            var arr2Copy = arr2.slice();
+            var arr3Copy = arr2.slice(1, 5);
+            var arr4Copy = arr2.slice(-5, -2);
+            console.log(arr2Copy);         // ["我是第一个", "我是第二个", "我是第三个", "我是第四个", "我是第五个", "我是第六个"]
+            console.log(arr3Copy);        // ["我是第二个", "我是第三个", "我是第四个", "我是第五个"]
+            console.log(arr4Copy);        //["我是第二个", "我是第三个", "我是第四个"]  
+
+            arr2Copy.shift();
+            console.log(arr2Copy, arr2)  // ["我是第二个", "我是第三个", "我是第四个", "我是第五个", "我是第六个"]
+                                        // ["我是第一个", "我是第二个", "我是第三个", "我是第四个", "我是第五个", "我是第六个"]
+            </code>
+        </pre>
+
+        <h3>6、获取数组中的索引 indexOf ，通过索引位置删除元素 splice 。</h3>
+        <pre>
+            <code>
+            var arr2 = ['我是第一个','我是第二个','我是第三个','我是第四个','我是第五个','我是第六个'];
+
+            console.log('获取索引');
+            console.log(arr2.indexOf('我是第一个'));  // 0
+        
+            var arr3 = arr2.splice(0, 1);  //删除一个;
+            console.log(arr3, arr2);  //["我是第一个"] , ["我是第二个", "我是第三个", "我是第四个", "我是第五个", "我是第六个"]
+        
+            var arr4 = arr2.splice(0, 2); //从第一个开始，删除2两个;
+            console.log(arr4, arr2);  // ["我是第二个", "我是第三个"], ["我是第四个", "我是第五个", "我是第六个"]
+            </code>
+        </pre>
+
+        
+    </div>
+
+</body>
+</html>
+<script src="arrFun.js" rel=""></script>
