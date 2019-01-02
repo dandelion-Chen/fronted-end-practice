@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Function 函数</title>
+    <style> 
+        code{
+            background-color: #f3f3f3;
+            border-radius: 3px;
+            display: inline-block;
+            padding: 10px 50px 10px 0;
+            color: #353553;
+        }
+        p {
+            color: #ca6122;
+            font-size: 15px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Function</h1>
+    <p>注意：使用Function构造器生成的Function对象是在函数创建时解析的。这比你使用函数声明或者函数表达式(function)并在你的代码中调用更为低效，因为使用后者创建的函数是跟其他代码一起解析的。</p>
+    <div>
+        <h3>1、函数声明</h3>
+        <p>解释： JavaScript 在执行任何代码段之前，将函数声明放入内存中的优点之一是，这允许你可以在你的代码中使用一个函数，在声明该函数之前。</p>
+        <p>注意：尽管函数这样使用不报错，但还是比较推荐“先声明，后使用”！</p>
+        <pre>
+            <code>
+                catName("Chloe");  // 我的猫名叫 Chloe
+
+                // 在调用后再声明，也不会报错。因为在JavaScript中执行上下文的工作方式造成的。
+                function catName(name) {                   
+                    console.log("我的猫名叫 " + name);   
+                }
+            </code>
+        </pre>
+
+        <h3>2、函数表达式</h3>
+        <p>解释：数表达式（function expression）非常类似于函数声明（function statement）（详情查看函数声明），并且两者拥有几乎相同的语法。函数表达式与函数声明的最主要区别是函数名称（function name），在函数表达式中可省略它，从而创建匿名函数（anonymous functions）。</p>
+        <p>注意：JavaScript中的函数表达式没有提升。</p>
+        <pre>
+            <code>
+                // notHoisted();   // TypeError: notHoisted is not a function
+
+                var notHoisted = function() {
+                    console.log('bar');
+                };
+            
+                notHoisted();   // bar
+            </code>
+        </pre>
+
+        <h3>3、原型对象方法 apply() </h3>
+        <p>描述：在调用一个存在的函数时，你可以为其指定一个 this 对象。 this 指当前对象，也就是正在调用这个函数的对象。 使用 apply， 你可以只写一次这个方法然后在另一个对象中继承它，而不用在新对象中重复写该方法。</p>
+        <p>注意： apply 后面的变量使用的数组形式，而call不是！</p>
+        <pre>
+            <code>
+                var arr = [2, 5, 6, 8, 8, 9];
+
+                console.log(Math.max.apply(null, arr));  // 9
+                console.log(Math.min.apply(null, arr));  // 2
+            </code>
+        </pre>
+
+        <h3>4、原型对象方法 call() </h3>
+        <p>描述：call()允许为不同的对象分配和调用属于一个对象的函数/方法。
+                call()提供新的 this 值给当前调用的函数/方法。你可以使用call来实现继承：写一个方法，然后让另外一个新的对象来继承它（而不是在新对象中再写一次这个方法）。</p>
+
+        <pre>
+            <code>
+                var arr = [2, 5, 6, 8, 8, 9];
+
+                console.log('---------------------- 开始以call -------------------------');
+
+                console.log(Math.max.call(this, ...arr));  // 9
+                console.log(Math.min.call(this, ...arr));  // 2
+            </code>
+        </pre>
+
+        <h3>5、原型对象方法 bind()</h3>
+        <p>描述：bind()方法创建一个新的函数，在调用时设置this关键字为提供的值。并在调用新函数时，将给定参数列表作为原函数的参数序列的前若干项。 </p>
+        <p>注意：以下三种请款，在第二种情况中，将getX从对象中取出，然后在这外部执行，作用域指向的是全局的，所以为undefined。解决这问题可以使用bind解决。</p>
+        <pre>
+            <code>
+
+            var module = {
+                x: 42,
+                getX: function() {
+                    console.log(this.x);
+                    return this.x;
+                }
+            }
+            
+            console.log(module.getX()); // 42
+
+            var unboundGetX = module.getX;
+            console.log(unboundGetX());  //undefined  The function gets invoked at the global scope
+
+            
+            var boundGetX = unboundGetX.bind(module);
+            console.log(boundGetX());  // 42
+            </code>
+        </pre>
+    </div>
+</body>
+</html>
+<script src="function.js" ></script>
