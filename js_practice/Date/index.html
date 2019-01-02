@@ -5,8 +5,105 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Date 函数实操</title>
+    <style> 
+        code{
+            background-color: #f3f3f3;
+            border-radius: 3px;
+            display: inline-block;
+            padding: 10px 50px 10px 0;
+            color: #353553;
+        }
+        p {
+            color: #ca6122;
+            font-size: 15px;
+        }
+    </style>
 </head>
 <body>
-    
+    <h1>创建 Date 实例用来处理日期和时间。Date 对象基于1970年1月1日（世界标准时间）起的毫秒数。</h1>
+    <div>
+        <h3>1、创建时间方法 new Date</h3>
+        <!-- 
+            new Date();
+            new Date(value);
+            new Date(dateString);
+            new Date(year, month[, day[, hour[, minutes[, seconds[, milliseconds]]]]]); 
+        -->
+        
+          
+        <!-- <p>如果没有输入任何参数，则Date的构造器会依据系统设置的当前时间来创建一个Date对象。</p>
+        <p>如果提供了至少两个参数，其余的参数均会默认设置为1（如果没有提供day参数）或者0。</p>
+        <p>JavaScript的时间是由世界标准时间（UTC）1970年1月1日开始，用毫秒计时，一天由86,400,000毫秒组成。Date对象的范围是-100,000,000天至100,000,000天（等效的毫秒值）。</p>
+        <p>JavaScript的Date对象为跨平台提供了统一的行为。时间属性可以在不同的系统中表示相同的时刻，而如果使用了本地时间对象，则反映当地的时间。</p>
+        <p>JavaScript 的Date对象提供了数个UTC时间的方法，也相应提供了当地时间的方法。UTC，也就是我们所说的格林威治时间，指的是time中的世界时间标准。而当地时间则是指执行JavaScript的客户端电脑所设置的时间。</p>
+        <p>以一个函数的形式来调用JavaScript的Date对象（i.e., 不使用 new 操作符）会返回一个代表当前日期和时间的字符串</p>
+             -->
+        <pre>
+            <code>
+            function createDate (value) {
+                var date;
+                if (value) {
+                    if(arguments.length > 1) {
+                        date = new Date (...arguments);
+                    }else {
+                        date = new Date (value);
+                    }
+                }else {
+                    date = new Date();
+                }
+                return date;
+            }
+
+            console.log('-------------------创建时间 -------------------');
+            console.log(createDate()) // 获取当前的时间
+            console.log(createDate('2018-12-31')); // 获取2018-12-31 的标准时间， 注意： 在ios中，需要将 ‘-’ 换成 ‘/’ 不然会报错。
+            console.log(createDate('2018/12/31'))
+            console.log(createDate(1995, 11, 17))
+
+            // Thu Dec 27 2018 17:21:57 GMT+0800 (中国标准时间)
+            // Mon Dec 31 2018 08:00:00 GMT+0800 (中国标准时间)
+            // Mon Dec 31 2018 00:00:00 GMT+0800 (中国标准时间)
+            // Sun Dec 17 1995 00:00:00 GMT+0800 (中国标准时间)
+            </code>
+        </pre>
+
+        <h3>2、获取当前日期毫秒数的 Date.now() 与 获取某个日期字符串的 的毫秒数 Date.parse()</h3>
+        <pre>
+            <code>
+                console.log(Date.now());
+                console.log(Date.parse('2016-01-02'));
+
+                // 1546413089085
+                // 1451692800000
+            </code>
+        </pre>
+
+        <h3>3、Date实例 </h3>
+        <p>
+            注意：date.getMonth()在实际操作中，需要加上1 ，因为从1月份开始返回的是0，以此类推；<br/>
+                 date.getDay()获取的时间为周日时，返回 0。
+        </p>
+        <pre>
+            <code>
+            var date = new Date('2018-12-30');
+            console.log(date.getDate())       // 本地时间返回指定日期对象的月份中的第几天（1-31）
+            console.log(date.getDay())       // 根据本地时间返回指定日期对象的星期中的第几天（0-6） 周日为 0
+            console.log(date.getFullYear())  // 返回指定日期对象的年份
+            console.log(date.getMinutes())   // 返回指定日期对象的分钟（0-59）
+            console.log(date.getMonth())     // 返回指定日期对象的月份（0-11）
+            console.log(date.getSeconds());  // 返回指定日期对象的秒数（0-59）。
+            console.log(date.getTime());     // 返回从1970-1-1 00:00:00 UTC（协调世界时）到该日期经过的毫秒数
+
+            // 30
+            // 0
+            // 2018
+            // 0
+            // 11
+            // 0
+            // 1546128000000
+            </code>
+        </pre>
+    </div>
 </body>
 </html>
+<script src="date.js" ></script>
